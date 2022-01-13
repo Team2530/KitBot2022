@@ -10,8 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.SingleJoystickDrive;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.InCANCievable;
+import frc.robot.subsystems.InCANceivable;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -25,7 +24,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
     // The robot's subsystems and commands are defined here...
     private final DriveTrain drivetrain = new DriveTrain();
-    private final InCANCievable lights = new InCANCievable(6);
+    private final InCANceivable lights = new InCANceivable(6);
     private JoystickButton trigger;
 
     final Joystick stick1 = new Joystick(1);

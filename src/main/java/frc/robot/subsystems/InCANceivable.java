@@ -10,7 +10,7 @@ import edu.wpi.first.hal.CANData;
 import edu.wpi.first.wpilibj.CAN;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class InCANCievable extends SubsystemBase {
+public class InCANceivable extends SubsystemBase {
     private int dvc_num = 5;
 
     private static final int mfg = 8; // Fill in from InCANCievable github
@@ -22,7 +22,7 @@ public class InCANCievable extends SubsystemBase {
     // Note: API ID (class) is 6 bits
 
     /** Creates a new ExampleSubsystem. */
-    public InCANCievable(int can_id) {
+    public InCANceivable(int can_id) {
         conn = new CAN(dvc_num = can_id, mfg, type);
     }
 
