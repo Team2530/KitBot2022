@@ -12,39 +12,40 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 
 public class SingleJoystickDrive extends CommandBase {
-  /**
-   * Creates a new SingleJoystickDrive.
-   */
-  DriveTrain m_drivetrain;
-  Joystick stick;
+    /**
+     * Creates a new SingleJoystickDrive.
+     */
+    DriveTrain m_drivetrain;
+    Joystick stick;
 
-  public SingleJoystickDrive(DriveTrain m_drivetrain, Joystick stick) {
-    this.m_drivetrain = m_drivetrain;
-    this.stick = stick;
-    // Use addRequirements() here to declare subsystem dependencies.
-  }
+    public SingleJoystickDrive(DriveTrain m_drivetrain, Joystick stick) {
+        this.m_drivetrain = m_drivetrain;
+        this.stick = stick;
+        // Use addRequirements() here to declare subsystem dependencies.
+    }
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
+    // Called when the command is initially scheduled.
+    @Override
+    public void initialize() {
 
-  }
+    }
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    m_drivetrain.singleJoystickDrive(stick.getZ(), stick.getY());
-  }
+    // Called every time the scheduler runs while the command is scheduled.
+    @Override
+    public void execute() {
+        m_drivetrain.singleJoystickDrive(stick.getZ() * (stick.getRawButton(2) ? 0.5 : 1.0),
+                stick.getY() * (stick.getRawButton(2) ? 0.5 : 1.0));
+    }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-    //m_drivetrain.stop();
-  }
+    // Called once the command ends or is interrupted.
+    @Override
+    public void end(boolean interrupted) {
+        // m_drivetrain.stop();
+    }
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+    // Returns true when the command should end.
+    @Override
+    public boolean isFinished() {
+        return false;
+    }
 }

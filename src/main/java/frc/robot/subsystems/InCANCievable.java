@@ -4,7 +4,6 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.hal.CANData;
@@ -24,7 +23,6 @@ public class InCANCievable extends SubsystemBase {
 
     /** Creates a new ExampleSubsystem. */
     public InCANCievable(int can_id) {
-        VictorSPX e;
         conn = new CAN(dvc_num = can_id, mfg, type);
     }
 
@@ -39,7 +37,7 @@ public class InCANCievable extends SubsystemBase {
 
     // @Override
     // public void simulationPeriodic() {
-    //     // This method will be called once per scheduler run during simulation
+    // // This method will be called once per scheduler run during simulation
     // }
 
     public void runProgram(int prog) {
