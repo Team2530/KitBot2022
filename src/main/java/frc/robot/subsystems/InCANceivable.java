@@ -13,8 +13,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class InCANceivable extends SubsystemBase {
     private int dvc_num = 5;
 
-    private static final int mfg = 8; // Fill in from InCANCievable github
-    private static final int type = 10; // Fill in from InCANCievable github
+    private static final int MFG = 8; // Fill in from InCANCievable github
+    private static final int TYPE = 10; // Fill in from InCANCievable github
 
     CAN conn;
     CANData recv;
@@ -23,7 +23,7 @@ public class InCANceivable extends SubsystemBase {
 
     /** Creates a new ExampleSubsystem. */
     public InCANceivable(int can_id) {
-        conn = new CAN(dvc_num = can_id, mfg, type);
+        conn = new CAN(dvc_num = can_id, MFG, TYPE);
     }
 
     @Override

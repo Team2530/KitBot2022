@@ -27,7 +27,7 @@ public class RobotContainer {
     private final InCANceivable lights = new InCANceivable(6);
     private JoystickButton trigger;
 
-    final Joystick stick1 = new Joystick(1);
+    final Joystick stick1 = new Joystick(0);
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.

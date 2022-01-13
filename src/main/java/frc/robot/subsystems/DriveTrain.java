@@ -52,7 +52,7 @@ public class DriveTrain extends SubsystemBase {
      * @param z The joystick's vertical "twist". Any value from -1.0 to 1.0.
      */
     public void singleJoystickDrive(double x, double z) {
-        dd.arcadeDrive(x, -z);
+        dd.arcadeDrive(x, z);
     }
 
     public void velocityDrve(double forwards, double angular) {
