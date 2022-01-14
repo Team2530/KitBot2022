@@ -23,7 +23,7 @@ public class InCANceivable extends SubsystemBase {
 
     /** Creates a new ExampleSubsystem. */
     public InCANceivable(int can_id) {
-        conn = new CAN(dvc_num = can_id, MFG, TYPE);
+        conn = new CAN(can_id, MFG, TYPE);
     }
 
     @Override
@@ -42,9 +42,11 @@ public class InCANceivable extends SubsystemBase {
 
     public void runProgram(int prog) {
         conn.writePacket(new byte[] { (byte) prog }, 25);
+        // conn.writePacketRepeating(new byte[] { (byte) prog }, 25, 10);
     }
 
     public void stopProgram() {
+        // conn.stopPacketRepeating(25);
         conn.writePacket(new byte[0], 25);
     }
 }

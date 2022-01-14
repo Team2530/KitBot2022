@@ -24,7 +24,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
     // The robot's subsystems and commands are defined here...
     private final DriveTrain drivetrain = new DriveTrain();
-    private final InCANceivable lights = new InCANceivable(6);
+    private final InCANceivable lights = new InCANceivable(3);
     private JoystickButton trigger;
 
     final Joystick stick1 = new Joystick(0);
@@ -43,10 +43,17 @@ public class RobotContainer {
      * ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then
      * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
+
     private void configureButtonBindings() {
         trigger = new JoystickButton(stick1, 1);
-        trigger.whenPressed(() -> lights.runProgram(1));
-        trigger.whenReleased(() -> lights.stopProgram());
+        trigger.whenPressed(() -> {
+            System.out.println("On");
+            lights.runProgram(1);
+        }, lights);
+        trigger.whenReleased(() -> {
+            System.out.println("Off");
+            lights.stopProgram();
+        }, lights);
     }
 
     /**
