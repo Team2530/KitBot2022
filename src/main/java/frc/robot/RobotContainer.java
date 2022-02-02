@@ -7,10 +7,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.SingleJoystickDrive;
+import frc.robot.subsystems.CANLights;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.InCANceivable;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -24,7 +23,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
     // The robot's subsystems and commands are defined here...
     private final DriveTrain drivetrain = new DriveTrain();
-    private final InCANceivable lights = new InCANceivable(3);
+    CANLights lights = new CANLights(3); // Device number determined by jumpers on the board
     private JoystickButton trigger;
 
     final Joystick stick1 = new Joystick(0);
@@ -46,14 +45,6 @@ public class RobotContainer {
 
     private void configureButtonBindings() {
         trigger = new JoystickButton(stick1, 1);
-        trigger.whenPressed(() -> {
-            System.out.println("On");
-            lights.runProgram(1);
-        }, lights);
-        trigger.whenReleased(() -> {
-            System.out.println("Off");
-            lights.stopProgram();
-        }, lights);
     }
 
     /**
