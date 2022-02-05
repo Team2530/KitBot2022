@@ -4,7 +4,9 @@ import java.util.Arrays;
 
 import com.revrobotics.ColorSensorV3;
 
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.I2C.Port;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.InCANDevice;
 
 // public class InCANceivable extends SubsystemBase {
@@ -77,27 +79,33 @@ import frc.robot.InCANDevice;
 // }
 // }
 
-public class CANLights extends InCANDevice {
-    ColorSensorV3 sensor = new ColorSensorV3(Port.kOnboard);
+public class BallDetection extends InCANDevice {
+    public static enum BallState {
+        IDK,
+        Red,
+        Green,
+        Blue,
+        None
+    }
 
-    public CANLights(
+    BallState[] states = new BallState[2];
+
+    public BallDetection(
             int deviceNum) {
         super(deviceNum);
-        this.apiID = 25;
+        this.apiID = 32 << 4;
     }
 
     @Override
     public void onDataReceived(byte[] data) {
-        System.out.printf("Recieved some data: %s", Arrays.toString(data));
+        for (int si = 0; si < 2; ++si)
+            states[si] = BallState.values()[data[si]];
+
+        SmartDashboard.putString("Ball states: ", String.format("%s\n", Arrays.toString(states)));
     }
 
     @Override
     public void periodic() {
         super.periodic(); // Make sure to call super, InCANDevice needs to look for CAN messages
-        sendData(new byte[] {
-                (byte) (sensor.getRed() * 1.5 * 255),
-                (byte) (sensor.getGreen() * 1.5 * 255),
-                (byte) (sensor.getBlue() * 1.5 * 255)
-        });
     }
 }

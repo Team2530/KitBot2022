@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.SingleJoystickDrive;
-import frc.robot.subsystems.CANLights;
+import frc.robot.subsystems.BallDetection;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
     // The robot's subsystems and commands are defined here...
     private final DriveTrain drivetrain = new DriveTrain();
-    CANLights lights = new CANLights(3); // Device number determined by jumpers on the board
+    BallDetection lights = new BallDetection(3); // Device number determined by jumpers on the board
     private JoystickButton trigger;
 
     final Joystick stick1 = new Joystick(0);
