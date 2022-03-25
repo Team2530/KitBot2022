@@ -4,12 +4,16 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.util.Color;
 import frc.robot.commands.SingleJoystickDrive;
+import frc.robot.commands.TestMotors;
 import frc.robot.subsystems.BallDetection;
-import frc.robot.subsystems.CANLights;
+import frc.robot.subsystems.Indicators;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -23,10 +27,11 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  */
 public class RobotContainer {
     // The robot's subsystems and commands are defined here...
-    private final DriveTrain drivetrain = new DriveTrain();
+    // private final DriveTrain drivetrain = new DriveTrain();
+    private final TalonFX cont = new TalonFX(10);
     // BallDetection balldetection = new BallDetection(3); // Device number
     // determined by jumpers on the board
-    CANLights lights = new CANLights(3);
+    Indicators lights = new Indicators(3);
     private JoystickButton trigger;
 
     final Joystick stick1 = new Joystick(0);
@@ -48,8 +53,8 @@ public class RobotContainer {
 
     private void configureButtonBindings() {
         trigger = new JoystickButton(stick1, 1);
-        trigger.whenPressed(() -> lights.runProgram(1));
-        trigger.whenReleased(() -> lights.runProgram(0));
+        trigger.whenPressed(() -> lights.setIndicatorColor(0, Color.kRed));
+        trigger.whenReleased(() -> lights.setIndicatorColor(0, Color.kBlue));
     }
 
     /**
@@ -63,6 +68,6 @@ public class RobotContainer {
     // }
 
     public Command getTeleopCommand() {
-        return new SingleJoystickDrive(drivetrain, stick1);
+        return new TestMotors(cont);
     }
 }
