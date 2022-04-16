@@ -7,23 +7,21 @@
 
 package frc.robot.commands;
 
-import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Pneumatics;
 
-public class TestMotors extends CommandBase {
-    TalonFX motor;
+public class PneumaticsControl extends CommandBase {
     /**
      * Creates a new SingleJoystickDrive.
      */
-    DriveTrain m_drivetrain;
+    Pneumatics p;
     Joystick stick;
 
-    public TestMotors(TalonFX motor) {
-        this.motor = motor;
+    public PneumaticsControl(Pneumatics pneu, Joystick stick) {
+        this.p = pneu;
+        this.stick = stick;
         // Use addRequirements() here to declare subsystem dependencies.
     }
 
@@ -36,7 +34,7 @@ public class TestMotors extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        motor.set(TalonFXControlMode.PercentOutput, Math.random());
+        p.setPistonDeploy(stick.getRawButton(1));
     }
 
     // Called once the command ends or is interrupted.

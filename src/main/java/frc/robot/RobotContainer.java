@@ -10,12 +10,14 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.util.Color;
+import frc.robot.commands.PneumaticsControl;
 import frc.robot.commands.SingleJoystickDrive;
-import frc.robot.commands.TestMotors;
 import frc.robot.subsystems.BallDetection;
 import frc.robot.subsystems.Indicators;
+import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
@@ -26,15 +28,12 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  * commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-    // The robot's subsystems and commands are defined here...
-    // private final DriveTrain drivetrain = new DriveTrain();
-    private final TalonFX cont = new TalonFX(10);
-    // BallDetection balldetection = new BallDetection(3); // Device number
-    // determined by jumpers on the board
     Indicators lights = new Indicators(3);
-    private JoystickButton trigger;
+    DriveTrain drive = new DriveTrain();
+    Pneumatics p = new Pneumatics();
 
-    final Joystick stick1 = new Joystick(0);
+    private JoystickButton trigger;
+    final Joystick stick1 = new Joystick(1);
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -54,7 +53,7 @@ public class RobotContainer {
     private void configureButtonBindings() {
         trigger = new JoystickButton(stick1, 1);
         trigger.whenPressed(() -> lights.setIndicatorColor(0, Color.kRed));
-        trigger.whenReleased(() -> lights.setIndicatorColor(0, Color.kBlue));
+        trigger.whenReleased(() -> lights.setIndicatorColor(0, Color.kGreen));
     }
 
     /**
@@ -68,6 +67,6 @@ public class RobotContainer {
     // }
 
     public Command getTeleopCommand() {
-        return new TestMotors(cont);
+        return new ParallelCommandGroup(new SingleJoystickDrive(drive, stick1), new PneumaticsControl(p, stick1));
     }
 }
