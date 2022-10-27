@@ -14,8 +14,10 @@ import frc.robot.commands.PneumaticsControl;
 import frc.robot.commands.SingleJoystickDrive;
 import frc.robot.subsystems.BallDetection;
 import frc.robot.subsystems.Indicators;
+import frc.robot.subsystems.LemonLight;
 import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.TestInCANcoder;
+import frc.robot.subsystems.TestLemonLight;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
@@ -32,6 +34,9 @@ public class RobotContainer {
     // Indicators lights = new Indicators(3);
     DriveTrain drive = new DriveTrain();
     // Pneumatics p = new Pneumatics();
+
+    LemonLight ll = new LemonLight();
+    TestLemonLight tll = new TestLemonLight(ll);
 
     private JoystickButton trigger;
     final Joystick stick1 = new Joystick(1);
