@@ -10,15 +10,12 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.util.Color;
-import frc.robot.commands.PneumaticsControl;
-import frc.robot.commands.SingleJoystickDrive;
+import frc.robot.commands.ControllerControl;
 import frc.robot.subsystems.BallDetection;
 import frc.robot.subsystems.Indicators;
 import frc.robot.subsystems.LemonLight;
-import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.TestInCANcoder;
 import frc.robot.subsystems.TestLemonLight;
-import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -31,15 +28,11 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  * commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-    // Indicators lights = new Indicators(3);
-    DriveTrain drive = new DriveTrain();
-    // Pneumatics p = new Pneumatics();
+    XboxController xbox = new XboxController(0);
 
+    // Indicators lights = new Indicators(3);
     LemonLight ll = new LemonLight();
     TestLemonLight tll = new TestLemonLight(ll);
-
-    private JoystickButton trigger;
-    final Joystick stick1 = new Joystick(1);
     TestInCANcoder tecc = new TestInCANcoder();
 
     /**
@@ -74,9 +67,6 @@ public class RobotContainer {
     // }
 
     public Command getTeleopCommand() {
-        // return new ParallelCommandGroup(new SingleJoystickDrive(drive, stick1), new
-        // PneumaticsControl(p, stick1));
-
-        return new SingleJoystickDrive(drive, stick1);
+        return new ControllerControl(xbox);
     }
 }
