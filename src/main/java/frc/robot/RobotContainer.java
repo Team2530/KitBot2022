@@ -11,11 +11,11 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.util.Color;
 import frc.robot.commands.PneumaticsControl;
-import frc.robot.commands.SingleJoystickDrive;
+import frc.robot.commands.JoystickControl;
 import frc.robot.subsystems.BallDetection;
 import frc.robot.subsystems.Indicators;
 import frc.robot.subsystems.Pneumatics;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Toughbox;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -28,12 +28,11 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  * commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-    Indicators lights = new Indicators(3);
-    DriveTrain drive = new DriveTrain();
-    Pneumatics p = new Pneumatics();
+    final XboxController conn = new XboxController(0);
 
-    private JoystickButton trigger;
-    final Joystick stick1 = new Joystick(1);
+    // Indicators lights = new Indicators(3);
+    Pneumatics p = new Pneumatics();
+    Toughbox toughbox = new Toughbox(2, 1, false, false);
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -51,9 +50,6 @@ public class RobotContainer {
      */
 
     private void configureButtonBindings() {
-        trigger = new JoystickButton(stick1, 1);
-        trigger.whenPressed(() -> lights.setIndicatorColor(0, Color.kRed));
-        trigger.whenReleased(() -> lights.setIndicatorColor(0, Color.kGreen));
     }
 
     /**
@@ -67,6 +63,6 @@ public class RobotContainer {
     // }
 
     public Command getTeleopCommand() {
-        return new ParallelCommandGroup(new SingleJoystickDrive(drive, stick1), new PneumaticsControl(p, stick1));
+        return new ParallelCommandGroup(new PneumaticsControl(p, conn), new JoystickControl(conn, toughbox));
     }
 }

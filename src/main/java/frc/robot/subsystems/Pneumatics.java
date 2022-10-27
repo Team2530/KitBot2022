@@ -27,14 +27,21 @@ public class Pneumatics extends SubsystemBase {
     DoubleSolenoid piston = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1);
 
     public Pneumatics() {
-        pcmCompressor.enableDigital();
-        // pcmCompressor.disable();
+        setCompressorEnabled(false);
+    }
+
+    public void setCompressorEnabled(boolean comp) {
+        if (comp) {
+            pcmCompressor.enableDigital();
+        } else {
+            pcmCompressor.disable();
+        }
     }
 
     @Override
     public void periodic() {
         // TODO Auto-generated method stub
-        SmartDashboard.putBoolean("Pressor Switch", pcmCompressor.getPressureSwitchValue());
+        SmartDashboard.putBoolean("Pressure Switch", pcmCompressor.getPressureSwitchValue());
         super.periodic();
     }
 
